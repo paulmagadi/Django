@@ -4,6 +4,7 @@
 You will need an Intergrated Development Environment such as Vscode.
 You must also ensure the latest version of python is installed in your device and properly configured to path.
 Make sure you have a virtual environment configured in your device. 
+
 Here we will use *pipenv* to install django together with a virtual environment.
 
 ## pipenv
@@ -20,6 +21,7 @@ To install pipenv, go to the terminal and run this command;
 Open your IDE, ie. VSCODE
 
 *You can use your terminal or shell*
+
 To creat a **Django Project**, open the terminal and start by changing the directory to the directory you want to use ie, *Desktop*.
 
 `cd Desktop`
