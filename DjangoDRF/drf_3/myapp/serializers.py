@@ -50,6 +50,7 @@ class CategorySerializer(serializers.ModelSerializer):
   
 class MenuItemSerializer(serializers.ModelSerializer):
   category = CategorySerializer()
+  category = CategorySerializer(read_only=True)
   stock = serializers.IntegerField(source='inventory')
   price_after_tax = serializers.SerializerMethodField(method_name= 'calculate_tax')
   class Meta:
