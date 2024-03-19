@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -17,8 +17,14 @@ def menu_items(request):
     serialized_items = MenuItemSerializer(items, many=True)
     return Response(serialized_items.data)
 
+# @api_view()
+# def menu_item(request, id):
+#     item = MenuItem.objects.get(pk=id)
+#     serialized_item = MenuItemSerializer(item)
+#     return Response(serialized_item.data)
+
 @api_view()
 def menu_item(request, id):
-    item = MenuItem.objects.get(pk=id)
+    item = get_object_or_404(MenuItem,pk=id)
     serialized_item = MenuItemSerializer(item)
     return Response(serialized_item.data)
