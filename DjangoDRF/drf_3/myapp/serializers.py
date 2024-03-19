@@ -29,9 +29,27 @@ from decimal import Decimal
   
   
   
+# class MenuItemSerializer(serializers.ModelSerializer):
+#   category = serializers.StringRelatedField()
+#   stock = serializers.IntegerField(source='inventory')
+#   price_after_tax = serializers.SerializerMethodField(method_name= 'calculate_tax')
+#   class Meta:
+#       model = MenuItem
+#       fields = ['id','category', 'title', 'price', 'stock', 'price_after_tax']  
+      
+#   def calculate_tax(self, product:MenuItem):
+#     return product.price * Decimal(1.1)
+
+
+
+class CategorySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Category
+    fields = ['id', 'slug', 'title']
+  
   
 class MenuItemSerializer(serializers.ModelSerializer):
-  category = serializers.StringRelatedField()
+  category = CategorySerializer()
   stock = serializers.IntegerField(source='inventory')
   price_after_tax = serializers.SerializerMethodField(method_name= 'calculate_tax')
   class Meta:
