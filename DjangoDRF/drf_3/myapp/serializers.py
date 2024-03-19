@@ -31,6 +31,7 @@ from decimal import Decimal
   
   
 class MenuItemSerializer(serializers.ModelSerializer):
+  category = serializers.StringRelatedField()
   stock = serializers.IntegerField(source='inventory')
   price_after_tax = serializers.SerializerMethodField(method_name= 'calculate_tax')
   class Meta:
