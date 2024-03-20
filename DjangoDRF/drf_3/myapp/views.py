@@ -82,27 +82,27 @@ from rest_framework import status
 
 
 #search
-@api_view(['GET', 'POST'])
-def menu_items(request):
-    if request.method == 'GET':
-        items = MenuItem.objects.select_related('category').all()
-        category_name = request.query_params.get('category')
-        to_price = request.query_params.get('to_price')
-        search = request.query_params.get('search')
-        if category_name:
-            items = items.filter(category__title=category_name)
-        if to_price:
-            items = items.filter(price__lte=to_price)
-        if search:
-            items = items.filter(title__contains=search)
-            # items = items.filter(title__startswith=search)   #Case insensitive
-        serialized_items = MenuItemSerializer(items, many=True)
-        return Response(serialized_items.data)
-    if request.method == 'POST':
-        serialized_items = MenuItemSerializer(data=request.data)
-        serialized_items.is_valid(raise_exception=True)
-        serialized_items.save()
-        return Response(serialized_items.data, status.HTTP_201_CREATED)
+# @api_view(['GET', 'POST'])
+# def menu_items(request):
+#     if request.method == 'GET':
+#         items = MenuItem.objects.select_related('category').all()
+#         category_name = request.query_params.get('category')
+#         to_price = request.query_params.get('to_price')
+#         search = request.query_params.get('search')
+#         if category_name:
+#             items = items.filter(category__title=category_name)
+#         if to_price:
+#             items = items.filter(price__lte=to_price)
+#         if search:
+#             items = items.filter(title__contains=search)
+#             # items = items.filter(title__startswith=search)   #Case insensitive
+#         serialized_items = MenuItemSerializer(items, many=True)
+#         return Response(serialized_items.data)
+#     if request.method == 'POST':
+#         serialized_items = MenuItemSerializer(data=request.data)
+#         serialized_items.is_valid(raise_exception=True)
+#         serialized_items.save()
+#         return Response(serialized_items.data, status.HTTP_201_CREATED)
 
 @api_view()
 def menu_item(request, id):
@@ -112,3 +112,30 @@ def menu_item(request, id):
 
 
 # ordering
+
+@api_view(['GET', 'POST'])
+def menu_items(request):
+    if request.method == 'GET':
+        items = MenuItem.objects.select_related('category').all()
+        category_name = request.query_params.get('category')
+        to_price = request.query_params.get('to_price')
+        search = request.query_params.get('search')
+        ordering = request.query_params.get('ordering')
+        if category_name:
+            items = items.filter(category__title=category_name)
+        if to_price:
+            items = items.filter(price__lte=to_price)
+        if search:
+            items = items.filter(title__contains=search)
+            # items = items.filter(title__startswith=search)   #Case insensitive
+        if ordering:
+            # items = items.order_by(ordering)
+            ordering_fields = ordering.split(",")
+            items = items.order_by(*ordering_fields)
+        serialized_items = MenuItemSerializer(items, many=True)
+        return Response(serialized_items.data)
+    if request.method == 'POST':
+        serialized_items = MenuItemSerializer(data=request.data)
+        serialized_items.is_valid(raise_exception=True)
+        serialized_items.save()
+        return Response(serialized_items.data, status.HTTP_201_CREATED)
