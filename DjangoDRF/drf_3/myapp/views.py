@@ -178,3 +178,10 @@ def menu_items(request):
         serialized_items.is_valid(raise_exception=True)
         serialized_items.save()
         return Response(serialized_items.data, status.HTTP_201_CREATED)
+    
+    
+    #token authentification
+    
+@api_view()
+def secret(request):
+    return Response({"message":"Secrete message"})
