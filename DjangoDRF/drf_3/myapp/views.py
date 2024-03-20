@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, throttle_classes
 from .models import MenuItem, Category
 from .serializers import MenuItemSerializer
 from rest_framework import status
@@ -9,7 +9,9 @@ from  decimal import Decimal
 from django.core.paginator import Paginator, EmptyPage
 
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import permission_classes
+
+from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+
 
 
 # Create your views here.
@@ -198,4 +200,17 @@ def manager_view(request):
         return Response({"message":"Only managers "})
     else:
         return Response({"message":"You are not authorized "}, 403)
+    
+    
+@api_view()  
+@throttle_classes([AnonRateThrottle])
+def throttle_check(request):
+    return Response({"message":"sucessfull"})
+
+
+@api_view()  
+@permission_classes([IsAuthenticated])
+@throttle_classes([UserRateThrottle])
+def throttle_check_auth(request):
+    return Response({"message":"sucessfull"})
     
