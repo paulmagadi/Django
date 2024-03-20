@@ -186,6 +186,6 @@ def menu_items(request):
     #token authentification
     
 @api_view()
-@permission_classes(IsAuthenticated)
+@permission_classes([IsAuthenticated])
 def secret(request):
     return Response({"message":"Secrete message"})
