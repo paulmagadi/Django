@@ -142,3 +142,8 @@ REST_FRAMEWORK = {
         'ten':'10/minute',
     }
 }
+
+DJOSER = {
+    "USER_ID_FIELD": "username",
+    # "LOGIN_FIELD":"email"
+}
