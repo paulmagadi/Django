@@ -14,6 +14,8 @@ from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 
 from .throttle import TenCallsPerMinute
 
+from rest_framework.permissions import IsAdminUser
+
 
 
 # Create your views here.
@@ -223,3 +225,9 @@ def throttle_check(request):
 def throttle_check_auth(request):
     return Response({"message":"sucessfull"})
     
+    
+    
+@api_view()  
+@permission_classes([IsAdminUser])
+def managers(request):
+    return Response({"message": "ok"})
