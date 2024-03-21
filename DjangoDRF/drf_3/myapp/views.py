@@ -242,7 +242,10 @@ def managers(request):
     if username:
         user = get_object_or_404(User, username=username)
         managers = Group.objects.get(name="Manager")
-        managers.user_set.add(user)
+        if request.method == 'POST':
+            managers.user_set.add(user)
+        elif request.method == 'DELETE':
+            managers.user_set.remove(user)
         return Response({"message": "ok"})
     
     
