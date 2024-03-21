@@ -15,6 +15,7 @@ from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
 from .throttle import TenCallsPerMinute
 
 from rest_framework.permissions import IsAdminUser
+from django.contrib.auth.models import User, Group
 
 
 
@@ -227,7 +228,22 @@ def throttle_check_auth(request):
     
     
     
+# @api_view()  
+# @permission_classes([IsAdminUser])
+# def managers(request):
+#     return Response({"message": "ok"})
+
+
+
 @api_view()  
 @permission_classes([IsAdminUser])
 def managers(request):
-    return Response({"message": "ok"})
+    username = request.data['username']
+    if username:
+        user = get_object_or_404(User, username=username)
+        managers = Group.objects.get(name="Manager")
+        managers.user_set.add(user)
+        return Response({"message": "ok"})
+    
+    
+    return Response({"message":"error"}, status.HTTP_400_BAD_REQUEST)
