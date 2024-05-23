@@ -10,7 +10,7 @@ def product(request):
         if form.is_valid():
             for uploaded_file in request.FILES.getlist('files'):
                 UploadedFile.objects.create(file=uploaded_file)
-            return redirect('upload_and_display')
+            return redirect('product')
     else:
         form = UploadFileForm()
 
