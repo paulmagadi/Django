@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-class Product(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.TextField()
-    images = models.ImageField(upload_to='products/', blank=True, null=True)
+class UploadedFile(models.Model):
+    file = models.FileField(upload_to='uploads/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

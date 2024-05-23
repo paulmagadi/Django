@@ -1,11 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import UploadedFile
+from .forms import UploadFileForm
 
-from django.views.generic import CreateView
+def upload_and_display_files(request):
+    files = UploadedFile.objects.all()
 
-from store_app.forms import ProductForm
-from store_app.models import Product
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            for uploaded_file in request.FILES.getlist('files'):
+                UploadedFile.objects.create(file=uploaded_file)
+            return redirect('upload_and_display')
+    else:
+        form = UploadFileForm()
 
-class ProductCreateView(CreateView):
-    model = Product
-    form_class = ProductForm
-    template_name = 'product_create.html'
+    return render(request, 'upload_and_display.html', {'form': form, 'files': files})
