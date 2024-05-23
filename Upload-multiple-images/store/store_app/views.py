@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import UploadedFile
 from .forms import UploadFileForm
 
-def upload_and_display_files(request):
+def product(request):
     files = UploadedFile.objects.all()
 
     if request.method == 'POST':
