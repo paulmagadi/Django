@@ -1,15 +1,9 @@
-from django.shortcuts import render
-
-# Create your views here.
-
-def home(request):
-    return render(request, 'home.html')
-
 from django.shortcuts import render, redirect
 from .models import UploadedFile
 from .forms import UploadFileForm
 
-def product(request):
+
+def home(request):
     files = UploadedFile.objects.all()
 
     if request.method == 'POST':
@@ -21,4 +15,4 @@ def product(request):
     else:
         form = UploadFileForm()
 
-    return render(request, 'upload_and_display.html', {'form': form, 'files': files})
+    return render(request, 'home.html', {'form': form, 'files': files})
