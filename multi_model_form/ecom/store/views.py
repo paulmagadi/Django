@@ -18,7 +18,7 @@ def product_create_view(request):
                 ProductImage.objects.create(product=product, image=image)
             
             messages.success(request, 'Product and images saved successfully!')
-            return redirect('home')  # replace with your actual view name
+            return redirect('home')  
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
