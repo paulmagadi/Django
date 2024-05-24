@@ -8,35 +8,12 @@
 <body>
   
     
-    <h1>Update Information for {{ product.name }}</h1>
-
-    <form method="post">
-      {% csrf_token %}
-      <table>
-        {{ product_form.as_table }}
-      </table>
-      <br>
-      <button name="save_product">Save Product</button>
-    </form>
-    
-    <h2>Product Images</h2>
     <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <table>
-        {{ product_image_form.as_table }}
-      </table>
-      <br>
-      <button name="save_product_image">Add Image</button>
-    </form>
-    
-    <h3>Existing Images</h3>
-    <ul>
-      {% for image in product_images %}
-        <li>
-          <img src="{{ image.image.url }}" alt="Product Image" style="width: 200px; height: auto;">
-        </li>
-      {% endfor %}
-    </ul>
+        {% csrf_token %}
+        {{ product_form.as_p }}
+        {{ product_image_form.as_p }}
+        <button type="submit">Submit</button>
+      </form>
 
 
 </body>

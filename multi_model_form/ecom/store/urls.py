@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ProductDetailUpdateView
+from .views import  product_create_view
 
 urlpatterns = [
-    path('product/<int:pk>/edit/', ProductDetailUpdateView.as_view(), name='product_detail_update_form'),
+    path('products/', product_create_view, name='product_create'),
 ]

@@ -23,7 +23,7 @@ def product_create_view(request):
         product_form = ProductForm()
         product_image_form = ProductImageForm()
 
-    return render(request, 'shop/product_form.html', {
+    return render(request, 'home.html', {
         'product_form': product_form,
         'product_image_form': product_image_form
     })
