@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+    
+{% block content %}
+<h1>Information about </a></h1>
+
+<form method="post">
+  {% csrf_token %}
+  <table>
+  {{ person_form }}
+  </table>
+  <br>
+  <button name="save_person">Save</button>
+</form>
+
+<form method="post">
+  {% csrf_token %}
+  <table>
+  {{ bio_form }}
+  </table>
+  <br>
+  <button name="save_bio">Save</button>
+</form>
+
+<form method="post">
+  {% csrf_token %}
+  <table>
+  {{ email_form }}
+  </table>
+  <br>
+  <button name="save_email">Save</button>
+</form>
+
+
+</body>
+</html>
