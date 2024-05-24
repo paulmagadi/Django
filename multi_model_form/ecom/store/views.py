@@ -48,5 +48,5 @@ class PersonDetailUpdateView(TemplateView):
             else:
                 messages.error(request, email_form.errors)
         
-        return HttpResponseRedirect(reverse('planner:person_detail_update_form', kwargs={'pk': self.kwargs['pk']}))
+        return HttpResponseRedirect(reverse('home', kwargs={'pk': self.kwargs['pk']}))
 
