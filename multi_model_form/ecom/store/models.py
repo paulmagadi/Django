@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+class Person(models.Model):
+    name =  models.CharField(max_length=255)
+
+class Bio(models.Model):
+    description = models.TextField()
+
+class Email(models.Model):
+    email = models.EmailField()
+    
