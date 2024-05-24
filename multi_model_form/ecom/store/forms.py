@@ -1,19 +1,15 @@
-# forms.py
 from django import forms
 from django.forms import ModelForm
-from .models import Person, Bio, Email
+from .models import Product, ProductImage
 
-class PersonForm(ModelForm):
+class ProductForm(ModelForm):
     class Meta:
-        model = Person
-        fields = '__all__'
+        model = Product
+        fields = ['name', 'price', 'description']
 
-class BioForm(ModelForm):
+class ProductImageForm(ModelForm):
     class Meta:
-        model = Bio
-        fields = ['bio', 'image']
+        model = ProductImage
+        fields = ['image']
 
-class EmailForm(ModelForm):
-    class Meta:
-        model = Email
-        fields = ['address']
+
