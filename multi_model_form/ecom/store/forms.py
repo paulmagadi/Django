@@ -5,7 +5,6 @@ from .models import Product, ProductImage
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
-
 class MultipleFileField(forms.FileField):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault("widget", MultipleFileInput())
@@ -24,25 +23,16 @@ class ProductForm(ModelForm):
         model = Product
         fields = ['name', 'price', 'description']
 
-class ProductImageForm(ModelForm):
-    class Meta:
-        model = ProductImage
-        fields = ['image']
-        widgets = {'image': forms.FileField()}
-        
+class ProductImageForm(forms.Form):
+    images = MultipleFileField()
+
+    def clean_images(self):
+        images = self.files.getlist('images')
+        if len(images) > 5:  # Limit the number of images to 5
+            raise forms.ValidationError('You can upload a maximum of 5 images.')
+        return images
 
 
-
-# class ProductImageForm(forms.ModelForm):
-#     images = MultiFileField(
-#         min_num=1,  # minimum number of files required
-#         max_num=10,  # maximum number of files allowed
-#         max_file_size=1024*1024*5,  # 5 MB
-#         required=True
-    # )
-
-    class Meta:
-        model = ProductImage
-        fields = ['images']
+    
 
 
