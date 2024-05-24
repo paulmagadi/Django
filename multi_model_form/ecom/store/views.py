@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib import messages
 
 class PersonDetailUpdateView(TemplateView):
-    template_name = 'planner/person_detail_update_form.html'
+    template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
