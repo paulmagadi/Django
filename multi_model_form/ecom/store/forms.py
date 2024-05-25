@@ -21,7 +21,7 @@ class MultipleFileField(forms.FileField):
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'price', 'description']
+        fields = ['name', 'profile_image', 'price', 'description']
 
 class ProductImageForm(forms.Form):
     images = MultipleFileField()

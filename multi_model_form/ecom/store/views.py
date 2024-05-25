@@ -8,7 +8,7 @@ def home(request):
 
 def product_create_view(request):
     if request.method == 'POST':
-        product_form = ProductForm(request.POST)
+        product_form = ProductForm(request.POST, request.FILES)
         product_image_form = ProductImageForm(request.POST, request.FILES)
         
         if product_form.is_valid() and product_image_form.is_valid():
