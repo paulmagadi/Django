@@ -4,7 +4,8 @@ from .forms import ProductForm
 
 # Create your views here.
 def home(request):
-    return render(request, 'store/index.html')
+    products = Product.objects.all()
+    return render(request, 'store/index.html', {'products': products})
 
 def create_product(request):
     if request.method == 'POST':
