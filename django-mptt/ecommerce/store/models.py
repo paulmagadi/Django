@@ -27,6 +27,9 @@ class Specification(MPTTModel):
 class Color(models.Model):
     color = models.CharField(max_length=200, unique=True)
     
+    def __str__(self):
+        return self.color
+    
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
