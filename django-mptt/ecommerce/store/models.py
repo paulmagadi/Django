@@ -42,7 +42,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2)
     category = TreeForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     Specification= TreeForeignKey(Specification, on_delete=models.CASCADE)
-    color = models.ForeignKey(Color, on_delete=models.PROTECT)
+    color = models.ForeignKey(Color, on_delete=models.RESTRICT)
 
     def __str__(self):
         return self.name
