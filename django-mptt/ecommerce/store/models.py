@@ -30,6 +30,12 @@ class Color(models.Model):
     def __str__(self):
         return self.color
     
+class Size(models.Model):
+    size = models.CharField(max_length=200, unique=True)
+    
+    def __str__(self):
+        return self.size
+    
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
