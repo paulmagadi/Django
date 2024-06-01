@@ -1,6 +1,6 @@
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
-from .models import Category, Product, Specification
+from .models import Category, Product, Specification, Color
 
 class CategoryAdmin(MPTTModelAdmin):
     list_display = ('name', 'parent')
@@ -19,5 +19,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('category',)
 
 admin.site.register(Product, ProductAdmin)
+
+admin.site.register(Color)
 
 
