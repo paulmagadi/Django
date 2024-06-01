@@ -21,6 +21,9 @@ class Specification(MPTTModel):
     title = models.CharField(max_length=100, unique=True)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     
+    class MPTTMeta:
+        order_insertion_by = ['title']
+        
     def __str__(self):
         return self.title
     
@@ -41,7 +44,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=12, decimal_places=2)
     category = TreeForeignKey(Category, on_delete=models.CASCADE, related_name='products')
-    Specification= TreeForeignKey(Specification, on_delete=models.CASCADE)
+    Specification= models.ForeignKey(Specification, on_delete=models.CASCADE)
     color = models.ForeignKey(Color, on_delete=models.RESTRICT)
 
     def __str__(self):

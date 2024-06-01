@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Product
+from .models import Product, Specification
 from .forms import ProductForm
 
 # Create your views here.
@@ -26,4 +26,4 @@ def edit_product(request, pk):
             return redirect('home')  
     else:
         form = ProductForm(instance=product)
-    return render(request, 'store/edit_product.html', {'form': form, 'product': product})
+    return render(request, 'store/edit_product.html', {'form': form, 'product': product,})
