@@ -14,7 +14,7 @@ def create_product(request):
             return redirect('home')  
     else:
         form = ProductForm()
-    return render(request, 'create_product.html', {'form': form})
+    return render(request, 'store/create_product.html', {'form': form})
 
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
@@ -25,4 +25,4 @@ def edit_product(request, pk):
             return redirect('home')  
     else:
         form = ProductForm(instance=product)
-    return render(request, 'edit_product.html', {'form': form, 'product': product})
+    return render(request, 'store/edit_product.html', {'form': form, 'product': product})
