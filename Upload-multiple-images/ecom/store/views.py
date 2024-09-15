@@ -11,7 +11,7 @@ def home(request):
         if form.is_valid():
             for uploaded_file in request.FILES.getlist('files'):
                 UploadedFile.objects.create(file=uploaded_file)
-            return redirect('product')
+            return redirect('home')
     else:
         form = UploadFileForm()
 
