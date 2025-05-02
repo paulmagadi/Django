@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row">
+    <h1 class="mb-4">Product Details</h1>
+    <div class="product-card border rounded-1 p-3 mb-3">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>Price: {{ product.price }}</p>
+        <p>Stock: {{ product.stock }}</p>
+        {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <a href="{% url 'update_product' product.id %}" class="btn btn-primary">Edit</a>
+
+    <form action="{% url 'delete_product' product.id %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</div>
+
+
+
+{% endblock content %}

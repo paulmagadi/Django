@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+        
+<table class="table table-striped table-bordered">
+    <thead class="table-primary">
+        <tr>
+            <th colspan="6" class="text-center">Products List</th>
+        </tr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+                <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View</a>
+                <a href="{% url 'update_product' product.id %}" class="btn btn-secondary">Edit</a>
+                <button data-bs-toggle="modal" data-bs-target="#deleteProduct" data-product-url="{% url 'delete_product' product.id %}" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+
+<div class="modal fade" id="deleteProduct" tabindex="-1" aria-labelledby="deleteProductLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteProductLabel">Delete Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this product? This action cannot be undone!!!
+            </div>
+            <div class="modal-footer">
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+var deleteModal = document.getElementById('deleteProduct');
+deleteModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;  // Button that triggered the modal
+    var url = button.getAttribute('data-product-url');  // Extract info from data-* attributes
+    var form = deleteModal.querySelector('form');  // Get the form inside the modal
+    form.action = url;  // Set the form action to the product's delete URL
+});
+</script>
+{% endblock content %}
+    

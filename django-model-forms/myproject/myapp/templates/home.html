@@ -1,12 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Home Page</h1>
-    <a href="{% url 'product' %}"><button type="button">Add Product</button></a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row">
+
+    {% if products %}
+
+    {% for product in products %}
+    <div class="product-card border rounded-1 p-3 mb-3">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>Price: {{ product.price }}</p>
+        <p>Stock: {{ product.stock }}</p>
+
+        <a href="{% url 'update_product' product.id %}" class="btn btn-secondary"> Edit</a>
+
+        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View</a>
+
+    </div>
+    <br>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}

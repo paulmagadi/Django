@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% comment %}
+<!-- This form uses Django forms, which are a powerful way to handle form data in Django. The form is rendered using
+Django's template language, which allows for easy integration with the rest of the Django application. The form     
+includes fields for product name, description, price, and stock quantity. Each field is rendered using the Django
+form API, which provides built-in validation and error handling. The form also includes a CSRF token for security.
+The form action is set to the URL for adding a product, and it uses the POST method to submit the data. The button
+at the end of the form is styled with Bootstrap classes and is labeled "Add product".
+The form includes a title "Add Product" and uses Bootstrap classes for styling. Each input field is wrapped in a
+div with the class "mb-3" for margin-bottom spacing. The labels are associated with their respective input fields
+using the "for" attribute, which matches the "id" of the input fields. The form includes a CSRF token for security. -->
+<!-- The form also includes error handling for each field, displaying any validation errors that occur when the form is submitted. -->
+
+<form action="{% url 'add_product' %}" method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+        <div class="text-danger">{{ field.errors|join:", " }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <div class="mb-3">
+        <label for="image">Image</label>
+        <input type="file" name="image" id="image" accept="image/*">
+        {% if form.image.errors %}
+        <div class="text-danger">{{ form.image.errors|join:", " }}</div>
+        {% endif %}
+    </div>
+    <button type="submit">Add Product</button>
+</form>
+
+{% endcomment %}
+
+
+{% comment %}
+<!-- This form does not use Django forms, but rather standard HTML form elements. It includes fields for product
+name, description, price, and stock quantity. The form uses Bootstrap classes for styling and includes a CSRF
+token for security.
+The form action is set to the URL for adding a product, and it uses the POST method to submit the data. The
+button at the end of the form is styled with Bootstrap classes and is labeled "Back to List".
+The form includes a title "Add Product" and uses Bootstrap classes for styling. Each input field is wrapped in a 
+div with the class "mb-3" for margin-bottom spacing. The labels are associated with their respective input fields
+using the "for" attribute, which matches the "id" of the input fields. The form includes a CSRF token for security. -->
+
+<form action="{% url 'add_product' %}" method="post">
+
+    {% csrf_token %}
+    <h1 class="mb-4">Add Product</h1>
+    <div class="mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Product Description</label>
+        <textarea class="form-control" id="description" name="description" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Product Price</label>
+        <input type="number" class="form-control" id="price" name="price" required>
+    </div>
+    <div class="mb-3">
+        <label for="stock" class="form-label">Stock Quantity</label>
+        <input type="number" class="form-control" id="stock" name="stock" required>
+    </div>
+    <button type="submit" class="btn btn-secondary">Back to List</button>
+
+</form>
+{% endcomment %}
+<!-- This form uses Django forms, which are a powerful way to handle form data in Django. The form is rendered using
+Django's template language, which allows for easy integration with the rest of the Django application. The form     
+includes fields for product name, description, price, and stock quantity. Each field is rendered using the Django
+form API, which provides built-in validation and error handling. The form also includes a CSRF token for security.      
+The form action is set to the URL for adding a product, and it uses the POST method to submit the data. The button
+at the end of the form is styled with Bootstrap classes and is labeled "Add product".
+The form includes a title "Add Product" and uses Bootstrap classes for styling. Each input field is wrapped in a
+div with the class "mb-3" for margin-bottom spacing. The labels are associated with their respective input fields
+using the "for" attribute, which matches the "id" of the input fields. The form includes a CSRF token for security. -->
+<!-- The form also includes error handling for each field, displaying any validation errors that occur when the form is submitted. -->
+<!-- The form uses Bootstrap classes for styling, including "form-label" for labels and "form-control" for input fields. -->
+<!-- The form includes a button to submit the form, which is styled with Bootstrap classes. -->
+
+<form action="{% url 'add_product' %}" method="post">
+    {% csrf_token %}
+    <h1 class="mb-4">Add Product</h1>
+    <div class="mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        {{ form.name}}
+        {% if form.name.errors %}
+        <div class="text-danger">{{ form.name.errors|join:", " }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Product Description</label>
+        {{ form.description }}
+        {% if form.description.errors %}
+        <div class="text-danger">{{ form.description.errors|join:", " }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Product Price</label>
+        {{ form.price }}
+        {% if form.price.errors %}
+        <div class="text-danger">{{ form.price.errors|join:", " }}</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="stock" class="form-label">Stock Quantity</label>
+        {{ form.stock }}
+        {% if form.stock.errors %}
+        <div class="text-danger">{{ form.stock.errors|join:", " }}</div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">Add product</button>
+    </div>
+</form>
+{% endblock content %}

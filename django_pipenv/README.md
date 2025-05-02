@@ -1,7 +1,6 @@
 # Creating a Django Project 
 
 ## Dependencies
-You will need an Intergrated Development Environment such as Vscode.
 You must also ensure the latest version of python is installed in your device and properly configured to path.
 Make sure you have a virtual environment configured in your device. 
 
